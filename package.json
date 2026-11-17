@@ -1,0 +1,31 @@
+{
+  "name": "nyxen_cli",
+  "version": "0.1.0",
+  "description": "Agente de programación para la terminal, con FreeLLMAPI",
+  "type": "module",
+  "bin": {
+    "nyxen": "bin/nyxen.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evolvedz2005-ux/NYXEN_CLI.git"
+  },
+  "homepage": "https://github.com/evolvedz2005-ux/NYXEN_CLI#readme",
+  "bugs": {
+    "url": "https://github.com/evolvedz2005-ux/NYXEN_CLI/issues"
+  },
+  "author": "evolvedz2005-ux",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {},
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node bin/nyxen.js"
+  },
+  "license": "MIT"
+}
