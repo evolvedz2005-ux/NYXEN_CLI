@@ -732,3 +732,36 @@ imágenes, voz, varios agentes en paralelo.
 Este proyecto fue creado con **inteligencia artificial** usando **[OpenCode](https://opencode.ai)**.
 
 También se publica con **fines educativos**.
+
+### Sin afiliación
+
+NYXEN_CLI es un proyecto independiente. No está afiliado, patrocinado, respaldado ni mantenido por FreeLLMAPI, OpenCode, OpenAI, Anthropic, Google, Meta, Mistral AI, Cohere, NVIDIA, Ollama, Alibaba, DeepSeek, Poolside, xAI ni cualquier otra empresa o proveedor mencionado. Los nombres de modelos, marcas, logotipos y servicios pertenecen a sus respectivos titulares y se usan solo con fines descriptivos.
+
+### Uso responsable
+
+El usuario es el único responsable de:
+
+- cumplir los términos de servicio, políticas de uso, límites y costos de FreeLLMAPI y de cada proveedor de modelos;
+- las instrucciones que le dé al agente y los comandos que autorice;
+- revisar el código y los archivos generados antes de usarlos o publicarlos;
+- asegurarse de tener los derechos necesarios sobre el contenido que procesa.
+
+No uses NYXEN_CLI para actividades ilegales, acceso no autorizado, distribución de malware ni para vulnerar derechos de terceros.
+
+### Contenido generado por IA
+
+Las respuestas y el código generados por modelos de IA pueden ser incorrectos, incompletos o reproducir accidentalmente contenido de terceros. Se entregan **sin garantía** y deben revisarse antes de usarse. NYXEN_CLI no reclama derechos sobre el código que generes; el contenido generado puede estar sujeto a los términos del proveedor del modelo correspondiente.
+
+### Privacidad
+
+NYXEN_CLI no incluye telemetría ni recopila datos por su cuenta. La configuración y las sesiones se guardan localmente en `%APPDATA%\NYXEN_CLI`. Los mensajes se envían a la API que el usuario configure (FreeLLMAPI y sus proveedores), sujetos a las políticas de privacidad de esos servicios. El repositorio no incluye API keys ni credenciales.
+
+### Licencia y garantías
+
+El código se distribuye bajo la licencia **MIT** (ver [`LICENSE`](LICENSE)). Se entrega **"tal cual"**, sin garantías de ningún tipo, y los autores no se hacen responsables de daños directos o indirectos derivados de su uso. La licencia MIT se aplica al código original de este repositorio, no a marcas, servicios ni contenido de terceros. El proyecto no incluye dependencias de terceros; usa únicamente módulos nativos de Node.js.
+
+### Contacto
+
+Para consultas, correcciones o reclamos relacionados con derechos de autor, abrí un issue en el repositorio.
+
+Este aviso no constituye asesoría legal.
