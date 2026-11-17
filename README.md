@@ -730,3 +730,5 @@ imágenes, voz, varios agentes en paralelo.
 ## Aviso
 
 Este proyecto fue creado con **inteligencia artificial** usando **[OpenCode](https://opencode.ai)**.
+
+También se publica con **fines educativos**.
