@@ -724,3 +724,9 @@ imágenes, voz, varios agentes en paralelo.
 > La falta de búsqueda web es la limitación práctica más grande para mods: el agente
 > depende de lo que el modelo "sepa" de la versión del loader. Si eso importa, pegá la
 > doc o el error exacto en el mensaje, o anotá las versiones en `NYXEN.md`.
+
+---
+
+## Aviso
+
+Este proyecto fue creado con **inteligencia artificial** usando **[OpenCode](https://opencode.ai)**.
