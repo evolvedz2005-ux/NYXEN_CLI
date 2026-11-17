@@ -93,11 +93,12 @@ Esta es la **única forma soportada** de instalar NYXEN_CLI. Requiere Node.js 20
 superior y no necesita git:
 
 ```powershell
-npm install -g https://github.com/evolvedz2005-ux/NYXEN_CLI/archive/refs/heads/main.tar.gz
+npm install -g https://github.com/evolvedz2005-ux/NYXEN_CLI/archive/refs/heads/main.tar.gz --allow-remote=all
 ```
 
-El comando descarga el código por HTTPS. Funciona con npm 12 o superior, que bloquea
-las dependencias `git:` con `EALLOWGIT`.
+El comando descarga el código por HTTPS. npm 12 bloquea por defecto los paquetes
+`git:` y los tarballs remotos (`EALLOWGIT` y `EALLOWREMOTE`); `--allow-remote=all`
+habilita el tarball solo para este comando y no cambia la configuración global.
 
 Cerrá y abrí una terminal nueva para que el `PATH` tome el comando, y verificá:
 
@@ -118,7 +119,7 @@ Si PowerShell bloquea el shim (`nyxen.ps1 cannot be loaded`), ver §14.
 
 ```powershell
 # actualizar a la última versión de main
-npm install -g https://github.com/evolvedz2005-ux/NYXEN_CLI/archive/refs/heads/main.tar.gz
+npm install -g https://github.com/evolvedz2005-ux/NYXEN_CLI/archive/refs/heads/main.tar.gz --allow-remote=all
 
 # desinstalar
 npm uninstall -g nyxen_cli
@@ -600,6 +601,7 @@ Freebuff no termina hasta verificar todo esto en Windows:
 | `nyxen.ps1 cannot be loaded` | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
 | Error EPERM al instalar global | Abrir PowerShell como administrador, o `npm config set prefix %APPDATA%\npm` |
 | `npm error code EALLOWGIT` | No uses `github:`; instalá con el tarball de §4 |
+| `npm error code EALLOWREMOTE` | Agregá `--allow-remote=all` al comando de §4 |
 | `fetch is not defined` | Node < 18; actualizar a Node 20+ |
 | Caracteres raros (`Ã¡`) | Usar Windows Terminal y `chcp 65001` |
 | 401 en todas las llamadas | La key es de otro servicio o expiró → `/connect` otra vez |
