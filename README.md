@@ -89,13 +89,17 @@ Todo lo demás que tipea el usuario es una **instrucción para el agente**.
 
 ## 4. Instalación
 
-Desde la carpeta del proyecto (donde está `package.json`):
+Esta es la **única forma soportada** de instalar NYXEN_CLI. Requiere Node.js 20 o
+superior y no necesita git:
 
 ```powershell
-npm install -g .
+npm install -g https://github.com/evolvedz2005-ux/NYXEN_CLI/archive/refs/heads/main.tar.gz
 ```
 
-Comprobación:
+El comando descarga el código por HTTPS. Funciona con npm 12 o superior, que bloquea
+las dependencias `git:` con `EALLOWGIT`.
+
+Cerrá y abrí una terminal nueva para que el `PATH` tome el comando, y verificá:
 
 ```powershell
 nyxen --version   # 0.1.0
@@ -110,101 +114,14 @@ nyxen
 
 Si PowerShell bloquea el shim (`nyxen.ps1 cannot be loaded`), ver §14.
 
-### 4.1 Instalación en un comando (desde otro PC)
-
-Para que `npm install -g ...` funcione en cualquier PC, el código tiene que estar
-publicado en algún lugar accesible. Hay tres caminos; el **A** es el más rápido.
-
-**Opción A — GitHub (recomendada, no hace falta publicar en npm)**
-
-1. Crear un repo **público** en GitHub y subir la carpeta del proyecto:
-
-   ```powershell
-   cd NYXEN_CLI
-   git init
-   git add .
-   git commit -m "NYXEN_CLI"
-   git branch -M main
-   git remote add origin https://github.com/evolvedz2005-ux/NYXEN_CLI.git
-   git push -u origin main
-   ```
-
-2. En cualquier PC con Node 20+ y git:
-
-   ```powershell
-   npm install -g github:evolvedz2005-ux/NYXEN_CLI
-   nyxen
-   ```
-
-   Sin clonar nada, sin `npm login`. npm baja el repo, instala y crea el comando
-   global usando el campo `bin` del `package.json`.
-
-   Si el repo es privado, el comando pide credenciales de GitHub
-   (`https://github.com/evolvedz2005-ux/NYXEN_CLI.git`) o hay que usar un token.
-
-**Opción B — npm público (`npm i -g nyxen_cli`)**
-
-1. Crear cuenta en <https://www.npmjs.com> y iniciar sesión en la terminal:
-   `npm login`
-2. Comprobar que el nombre esté libre: `npm view nyxen_cli` (debe dar 404).
-3. Publicar:
-
-   ```powershell
-   npm publish
-   ```
-
-4. En cualquier PC:
-
-   ```powershell
-   npm install -g nyxen_cli
-   ```
-
-Notas: el nombre del paquete es único a nivel mundial; si `nyxen_cli` está tomado,
-usar un scope (`@tu-usuario/nyxen-cli`, requiere `npm publish --access public`). El
-comando que se escribe en consola sigue siendo `nyxen` (viene del campo `bin`). Si el
-paquete incluye una API key hardcodeada, **no** publicarlo.
-
-**Opción C — Release + script de una línea (sin npm ni git)**
-
-Útil para amigos sin Node instalado. En el repo, un script `install.ps1`:
+### 4.1 Actualizar / desinstalar
 
 ```powershell
-# install.ps1 — uso: irm https://raw.githubusercontent.com/evolvedz2005-ux/NYXEN_CLI/main/install.ps1 | iex
-$ErrorActionPreference = "Stop"
-if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
-  winget install OpenJS.NodeJS.LTS --silent --accept-package-agreements --accept-source-agreements
-}
-npm install -g "github:evolvedz2005-ux/NYXEN_CLI"
-Write-Host "Listo. Abrí una terminal nueva y escribí: nyxen"
-```
+# actualizar a la última versión de main
+npm install -g https://github.com/evolvedz2005-ux/NYXEN_CLI/archive/refs/heads/main.tar.gz
 
-Y el comando único para el usuario final:
-
-```powershell
-irm https://raw.githubusercontent.com/evolvedz2005-ux/NYXEN_CLI/main/install.ps1 | iex
-```
-
-> Antes de instalar en otra PC: el repo debe incluir el `package.json` con
-> `"bin": { "nyxen": "bin/nyxen.js" }` y `"files": ["bin", "src", "README.md"]`,
-> y **nunca** el `config.json` con la API key (ese archivo vive en `%APPDATA%`, no en
-> el repo). Agregar `.gitignore` con `node_modules/`, `*.log` y `config.json`.
-
-### 4.2 Verificar la instalación
-
-```powershell
-nyxen --version      # 0.1.0
-nyxen --help         # uso básico (no es un comando de barra, es flag de arranque)
-```
-
-Después de instalar o actualizar, hay que abrir una terminal nueva para que el `PATH`
-tome el shim recién creado.
-
-### 4.3 Actualizar / desinstalar
-
-```powershell
-npm install -g github:evolvedz2005-ux/NYXEN_CLI   # actualizar (Opción A)
-npm update -g nyxen_cli                      # actualizar (Opción B)
-npm uninstall -g nyxen_cli                   # desinstalar
+# desinstalar
+npm uninstall -g nyxen_cli
 ```
 
 ---
@@ -634,7 +551,7 @@ NYXEN descubre y usa automáticamente todos los modelos que el usuario tenga dis
 
 Freebuff no termina hasta verificar todo esto en Windows:
 
-- [ ] `npm install -g .` sin errores; `nyxen --version` devuelve `0.1.0`.
+- [ ] Instalación global sin errores; `nyxen --version` devuelve `0.1.0`.
 - [ ] `nyxen` abre la interfaz desde cualquier carpeta mostrando el `cwd`.
 - [ ] Sin config, un mensaje responde `No hay conexión. Usá /connect primero.`
 - [ ] `/connect` con key válida guarda `%APPDATA%\NYXEN_CLI\config.json` y confirma.
@@ -682,6 +599,7 @@ Freebuff no termina hasta verificar todo esto en Windows:
 | `nyxen: command not found` | Reabrir la terminal; verificar `npm bin -g` / `%APPDATA%\npm` en el `PATH` |
 | `nyxen.ps1 cannot be loaded` | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
 | Error EPERM al instalar global | Abrir PowerShell como administrador, o `npm config set prefix %APPDATA%\npm` |
+| `npm error code EALLOWGIT` | No uses `github:`; instalá con el tarball de §4 |
 | `fetch is not defined` | Node < 18; actualizar a Node 20+ |
 | Caracteres raros (`Ã¡`) | Usar Windows Terminal y `chcp 65001` |
 | 401 en todas las llamadas | La key es de otro servicio o expiró → `/connect` otra vez |
@@ -694,7 +612,7 @@ Freebuff no termina hasta verificar todo esto en Windows:
 ```
 Leé el README.md de esta carpeta y construí NYXEN_CLI exactamente como está
 especificado: CLI de Node.js 20 (ESM, cero dependencias) para Windows, con
-binario global `nyxen` instalable con `npm install -g .`, que usa la API de
+binario global `nyxen` instalable desde GitHub (§4), que usa la API de
 FreeLLMAPI (endpoint compatible OpenAI en https://api.freellmapi.ai/v1).
 
 Debe ser un agente: loop con tool calling, herramientas list_dir, read_file,
